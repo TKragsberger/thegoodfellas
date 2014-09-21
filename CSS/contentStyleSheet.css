@@ -1,0 +1,32 @@
+#content{
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    height: 750px;
+    width: 600px;
+    margin: auto;
+    margin-left: 67px;
+    margin-right: 67px;
+    float: left;
+}
+
+#killShot{
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+    height: 400px; 
+    width: 550px
+}
+
+.contentText{
+    text-align: left;
+    color: #ffffff;
+    margin: 25px;
+}
+
+#body{
+    text-align: center;
+    height: 600px;
+    width: 1134px;
+    margin: auto;
+}
+

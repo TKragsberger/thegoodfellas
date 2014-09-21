@@ -1,0 +1,63 @@
+body{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 100% 100%;
+}
+
+#topMenu{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 150px;
+    width: 1134px;
+    margin: auto;
+}
+
+#topMenuTxt{
+    margin-top: 15px;
+    float: left;
+}
+
+#header{
+    font-size: 40px;
+    color: #ffffff;
+}
+
+#links{
+    text-align: center;
+    height: 100px;
+    width: 850px;
+    margin: auto;
+    display: inline-block;
+    float: left;
+}
+
+.topMenuLink{
+    margin-top: 34px;
+    color: #ffffff;
+    width: 6em;
+    text-decoration: none;
+    padding: 0.2em 0.6em;
+    border-left: 1px solid white;
+    display: inline-block;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+#activities{
+    border-right: 1px solid white;
+}
+
+.img{
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
+    float: left;
+}
+
+#rightImg{
+    float: right;
+}
