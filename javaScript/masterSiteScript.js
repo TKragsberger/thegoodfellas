@@ -1,8 +1,68 @@
 $(document).ready(function(){
+    connectToDB();
     masterAjax('htmlsites/topMenu.html', '#topMenu');
     masterAjax('htmlsites/leftMenu.html', '#sideMenuLeft');
     masterAjax('htmlsites/content.html', '#content');
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
+
+    $("#sideMenuRight").on("click", "#login", function(){
+       var username = $("#username").val();
+       var password = $("#password").val();
+       alert(username + " ------ " + password);
+       $.ajax({
+           type: 'POST',
+           url: 'database/login.php',
+           data:{
+                username: username,
+                password: password
+            },
+            success: function(data){
+//                $("#footer").html(data);
+                alert(data);
+            }
+        });
+    });
+    
+    $("#registration").on("click", "#regSubmit", function(){
+        var regUsername = $("#regUsername").val();
+        var regPassword = $("#regPassword").val();
+        var regEmail = $("#regEmail").val();
+        $.ajax({
+           type: 'POST',
+           url: 'database/registration.php',
+           data:{
+                username: regUsername,
+                password: regPassword,
+                email: regEmail
+            },
+            success: function(data){
+                $("#footer").html(data);
+            }
+        });
+    });
+    
+    $("#sideMenuRight").on("click", "#register", function() {
+        $.ajax({
+            url: 'htmlsites/registration.html',
+            success: function(data){
+                document.getElementById('registration').innerHTML = data;
+            }
+        });
+    });
+    
+    $("#registration").on("click", ".closeRegistration", function() {
+      document.getElementById('registration').innerHTML = '';
+    });
+    
+    function connectToDB(){
+        $.ajax({
+           url: 'database/dbConnect.php',
+           success: function(data){
+               
+               console.log("Der er forbindelse til databasen" + data);
+           }
+        });
+    }
     
     function masterAjax(url, div){
         $.ajax({
@@ -15,6 +75,7 @@ $(document).ready(function(){
     
     $('#topMenu').on('click', 'a', function(){
         var targetContent = $(this).text();
+        alert(targetContent);
         var searchQuery = ""; //<-----TODO
         var html = "<table>";
         $.ajax({

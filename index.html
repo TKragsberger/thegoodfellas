@@ -12,16 +12,44 @@ and open the template in the editor.
         <link type="text/css" rel="stylesheet" href="CSS/topMenuStyleSheet.css"/>
         <link type="text/css" rel="stylesheet" href="CSS/contentStyleSheet.css"/>
         <link type="text/css" rel="stylesheet" href="CSS/sideMenuStyleSheet.css"/>
+        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  
+  
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--        <script type="text/javascript">
+     $(function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "blind",
+        duration: 1000
+      }
+    });
+ 
+    $( "#sideMenuRight" ).on("click", "#register", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  });
+        </script>-->
     </head>
     <body style="background-image: url(IMG/layoutV1.png)">
         <div id="topMenu"></div>
 
         <div id="body">
             <div id="sideMenuLeft" class="sideMenu"></div>
+            <div id="registration"></div>
             <div id="content"></div>
             <div id="sideMenuRight" class="sideMenu"></div>
         </div>
+        
+        <div id="footer"></div>
     </body>
 </html>
