@@ -13,14 +13,16 @@ button {
     background:none!important;
      border:none; 
      padding:0!important;
-    /*border is optional*/
+     outline: none;
      cursor: pointer;
 }
 
 button:hover{
-    color: blue;
+    color: yellow;
     text-decoration: underline;
 }
+
+
 
 #killShot{
     display: block;

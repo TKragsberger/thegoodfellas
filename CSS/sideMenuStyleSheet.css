@@ -33,7 +33,7 @@ input{
     width: 150px;
 }
 
-.memberName{
+.sideMenuLink{
     text-decoration: none;
-    color: blue;
+    color: yellow;
 }
