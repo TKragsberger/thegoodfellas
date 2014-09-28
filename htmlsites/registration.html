@@ -1,34 +1,38 @@
 <div id="overlay">
     <div id="boxFrame">
         <div id="box">
-            <form id="registrationForm" method="post" action="">
-                <button class="closeRegistration"><img src="IMG/close.png" style="height: 15px; width: 15px; margin-left: 250px" alt="close"></button>
-                <!--<table style="color: white">-->
-                <label for="regUsername">Username</label>
-                <input id="regUsername" type="text" name="regUsername" /><br />
-                <label for="regPassword">Password</label>
-                <input id="regPassword" type="text" name="regPassword" /><br />
-                <label for="regEmail">Email</label>
-                <input id="regEmail" type="text" name="regEmail" /><br />
-                <input type="submit"/>
-<!--                    <tr>
-                            <td>Username:</td>
+                <button class="closeRegistration"><img src="IMG/close.png" style="height: 15px; width: 15px; margin-left: 280px" alt="close"></button>
+                <table style="color: white">
+                
+                    <tr>
+                            <td style="text-align: left;">Bruger navn:</td>
                             <td><input id="regUsername" type="text" name="username" /></td>
                     </tr>
                     <tr>
-                            <td>Password:</td>
+                        <td></td>
+                        <td class="errorText"><div id="regUsernameError"></div></td>
+                    </tr>
+                    <tr>
+                            <td style="text-align: left;">Kodeord:</td>
                             <td><input id="regPassword" type="password" name="password" /></td>
                     </tr>
                     <tr>
-                            <td>Email:</td>
+                        <td></td>
+                        <td class="errorText"><div id="regPasswordError"></div></td>
+                    </tr>
+                    <tr>
+                            <td style="text-align: left;">Email:</td>
                             <td><input id="regEmail" type="text" name="email" /></td>
                     </tr>
                     <tr>
-                            <td></td>
-                            <td><input id="regSubmit" class="closeRegistration" type="submit" value="Register" /></td>
+                        <td></td>
+                        <td class="errorText"><div id="regEmailError"></div></td>
                     </tr>
-                </table>-->
-            </form>
+                    <tr>
+                            <td></td>
+                            <td><input id="regSubmit" type="submit" value="Opret bruger" /></td>
+                    </tr>
+                </table>
         </div>
     </div>
 </div>
