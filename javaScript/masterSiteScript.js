@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    var validationUsername;
+    var validationPassword;
     connectToDB();
     masterAjax('htmlsites/topMenu.html', '#topMenu');
     masterAjax('htmlsites/leftMenu.html', '#sideMenuLeft');
@@ -6,42 +8,59 @@ $(document).ready(function(){
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
 
     $("#sideMenuRight").on("click", "#login", function(){
-       var username = $("#username").val();
-       var password = $("#password").val();
-       $.ajax({
-           type: 'POST',
-           url: 'database/login.php',
-           data:{
-                username: username,
-                password: password
-            },
-            dataype: 'json',
-            success: function(json) {
-                
-                $.each(json, function(i, item) {
-                    if (typeof item == 'object') {
-                        var element = item.result;
-                        if(element){
-                            alert(element);
-                            $('#footer').html(element);
+        $("#usernameError").html("");
+        $("#passwordError").html("");
+        var username = $("#username").val();
+        var password = $("#password").val();
+        validationUsername = validateIfEmpty(username);
+        validationPassword = validateIfEmpty(password);
+        if(validationPassword && validationUsername){
+            alert("you are here 2");
+            $.ajax({
+                type: 'POST',
+                url: 'database/login.php',
+                data:{
+                    username: username,
+                    password: password
+                },
+                dataype: 'json',
+                success: function(json) {
+                    alert("you are here");
+                    $.each(json, function(i, item) {
+                        if (typeof item == 'object') {
+                            var element = item.result;
+                            if(element){
+                                alert(element +  " success");
+                                $('#footer').html(element);
+                            }
                         }
-                    }
-                });
-                
-                
-            },
-            error: function(r) {
-                alert("Edit ajax failed" + r);
+                    });
+
+
+                },
+                error: function(r) {
+                    alert("Edit ajax failed" + r);
+                }
+            });
+        }else{
+            if(!validationUsername){
+                $("#usernameError").html("Indtast bruger navn!");
             }
-        });
+            if(!validationPassword){
+                $("#passwordError").html("Indtast kodeord!");
+            }
+        }
     });
     
     $("#registration").on("click", "#regSubmit", function(){
+        $("#regUsernameError").html("");
+        $("#regPasswordError").html("");
+        $("#regEmailError").html("");
         var regUsername = $("#regUsername").val();
         var regPassword = $("#regPassword").val();
         var regEmail = $("#regEmail").val();
-        var validationUsername = validateIfEmpty(regUsername);
-        var validationPassword = validateIfEmpty(regPassword);
+        validationUsername = validateIfEmpty(regUsername);
+        validationPassword = validateIfEmpty(regPassword);
         var validationEmail = validateEmail(regEmail);
         if(validationEmail && validationPassword && validationUsername){
             $.ajax({
@@ -58,9 +77,7 @@ $(document).ready(function(){
                         if (typeof item == 'object') {
                             var element = item.result;
                             if(element){
-                                alert(element);
                                 $('#registrationTable').html("Din bruger er blevet oprettet");
-                                
                             }
                         }
                     });

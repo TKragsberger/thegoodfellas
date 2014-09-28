@@ -27,8 +27,9 @@ if ( !empty ( $_POST ) ) {
 
         //Kill the script if the submitted username doesn't exit
         if (!$results) {
-                die('Bruger navnet findes ikke!');
-        }
+            $result = utf8_encode("username");
+            
+        }else{
 
         //Fetch our results into an associative array
         
@@ -60,7 +61,8 @@ if ( !empty ( $_POST ) ) {
                 $result = utf8_encode(true);
                 
         } else {
-                $result = utf8_encode(false);
+                $result = utf8_encode("password");
+        }
         }
         $data[] = array('result' => $result);
         echo json_encode($data);
