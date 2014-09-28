@@ -1,6 +1,9 @@
 <?php
 require_once('dbConnect.php');
+header('Content-Type: application/json');
 global $jdb;
+$data = array();
+$result = "";
 
 //Check to make sure the form submission is coming from our script
 //The full URL of our registration page
@@ -62,10 +65,14 @@ if ( !empty ( $_POST ) ) {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                            
 //                                              ændre så der står i registrings from at din account er blevet lavet log ind vent 5 sek +- 5 sek og så luk vindue
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    return "din account blev oprettet";
+                    $result = utf8_encode(true);
+                } else{
+                    $result = utf8_encode(false);
                 }
         } else {
                 die('Your form submission did not come from the correct page. Please check with the site administrator.');
         }
+        $data[] = array('result' => $result);
+        echo json_encode($data);
 }
 		

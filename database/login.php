@@ -1,6 +1,9 @@
 <?php
 require_once('dbConnect.php');
+header('Content-Type: application/json');
 global $jdb;
+$data = array();
+$result = "";
 
 if ( !empty ( $_POST ) ) {
 
@@ -54,10 +57,13 @@ if ( !empty ( $_POST ) ) {
                 //Set our authorization cookie
                 setcookie('theGoodfellasAuth[user]', $subName, 0, '', '', '', true);
                 setcookie('theGoodfellasAuth[authID]', $authID, 0, '', '', '', true);
+                $result = utf8_encode(true);
                 
         } else {
-                die('invalid');
+                $result = utf8_encode(false);
         }
+        $data[] = array('result' => $result);
+        echo json_encode($data);
 } else {
         die('empty');
 }

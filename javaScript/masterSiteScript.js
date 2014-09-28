@@ -8,7 +8,6 @@ $(document).ready(function(){
     $("#sideMenuRight").on("click", "#login", function(){
        var username = $("#username").val();
        var password = $("#password").val();
-       alert(username + " ------ " + password);
        $.ajax({
            type: 'POST',
            url: 'database/login.php',
@@ -16,9 +15,23 @@ $(document).ready(function(){
                 username: username,
                 password: password
             },
-            success: function(data){
-//                $("#footer").html(data);
-                alert(data);
+            dataype: 'json',
+            success: function(json) {
+                
+                $.each(json, function(i, item) {
+                    if (typeof item == 'object') {
+                        var element = item.result;
+                        if(element){
+                            alert(element);
+                            $('#footer').html(element);
+                        }
+                    }
+                });
+                
+                
+            },
+            error: function(r) {
+                alert("Edit ajax failed" + r);
             }
         });
     });
@@ -27,24 +40,41 @@ $(document).ready(function(){
         var regUsername = $("#regUsername").val();
         var regPassword = $("#regPassword").val();
         var regEmail = $("#regEmail").val();
-        $.ajax({
-           type: 'POST',
-           url: 'database/registration.php',
-           data:{
-                username: regUsername,
-                password: regPassword,
-                email: regEmail
-            },
-            success: function(data){
-                $("#footer").html(data);
-            }
-        });
+        
+        validateEmail(regEmail);
+//        $.ajax({
+//           type: 'POST',
+//           url: 'database/registration.php',
+//           data:{
+//                username: regUsername,
+//                password: regPassword,
+//                email: regEmail
+//            },
+//            dataype: 'json',
+//            success: function(json) {
+//                $.each(json, function(i, item) {
+//                    if (typeof item == 'object') {
+//                        var element = item.result;
+//                        if(element){
+//                            alert(element);
+//                            $('#footer').html(element);
+//                        }
+//                    }
+//                });
+//            },
+//            error: function(r) {
+//                alert("Edit ajax failed" + r);
+//            }
+//        });
     });
     
     $("#sideMenuRight").on("click", "#register", function() {
+        
         $.ajax({
+            
             url: 'htmlsites/registration.html',
             success: function(data){
+                alert(data);
                 document.getElementById('registration').innerHTML = data;
             }
         });
@@ -62,6 +92,24 @@ $(document).ready(function(){
                console.log("Der er forbindelse til databasen" + data);
            }
         });
+    }
+    
+    function validateEmail(email){
+        alert(email);
+        var test = email.contains("@");
+        alert(test);
+        if(test){
+            alert("step 2")
+            $("#footer").html("yeah it works");
+        } else {
+            alert("step 3")
+            $("#footer").html("nope");
+        }
+        
+    }
+    
+    function validateIfEmpty(data){
+        
     }
     
     function masterAjax(url, div){

@@ -1,25 +1,34 @@
 <div id="overlay">
     <div id="boxFrame">
         <div id="box">
-            <button class="closeRegistration"><img src="IMG/close.png" style="height: 15px; width: 15px; margin-left: 250px" alt="close"></button>
-            <table style="color: white">
-                <tr>
-                        <td>Username:</td>
-                        <td><input id="regUsername" type="text" name="username" /></td>
-                </tr>
-                <tr>
-                        <td>Password:</td>
-                        <td><input id="regPassword" type="password" name="password" /></td>
-                </tr>
-                <tr>
-                        <td>Email:</td>
-                        <td><input id="regEmail" type="text" name="email" /></td>
-                </tr>
-                <tr>
-                        <td></td>
-                        <td><input id="regSubmit" class="closeRegistration" type="submit" value="Register" /></td>
-                </tr>
-            </table>
+            <form id="registrationForm" method="post" action="">
+                <button class="closeRegistration"><img src="IMG/close.png" style="height: 15px; width: 15px; margin-left: 250px" alt="close"></button>
+                <!--<table style="color: white">-->
+                <label for="regUsername">Username</label>
+                <input id="regUsername" type="text" name="regUsername" /><br />
+                <label for="regPassword">Password</label>
+                <input id="regPassword" type="text" name="regPassword" /><br />
+                <label for="regEmail">Email</label>
+                <input id="regEmail" type="text" name="regEmail" /><br />
+                <input type="submit"/>
+<!--                    <tr>
+                            <td>Username:</td>
+                            <td><input id="regUsername" type="text" name="username" /></td>
+                    </tr>
+                    <tr>
+                            <td>Password:</td>
+                            <td><input id="regPassword" type="password" name="password" /></td>
+                    </tr>
+                    <tr>
+                            <td>Email:</td>
+                            <td><input id="regEmail" type="text" name="email" /></td>
+                    </tr>
+                    <tr>
+                            <td></td>
+                            <td><input id="regSubmit" class="closeRegistration" type="submit" value="Register" /></td>
+                    </tr>
+                </table>-->
+            </form>
         </div>
     </div>
 </div>
