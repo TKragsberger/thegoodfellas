@@ -59,8 +59,8 @@ $(document).ready(function(){
                             var element = item.result;
                             if(element){
                                 alert(element);
-                                $('#footer').html(element);
-                                document.getElementById('registration').innerHTML = '';
+                                $('#registrationTable').html("Din bruger er blevet oprettet");
+                                
                             }
                         }
                     });
