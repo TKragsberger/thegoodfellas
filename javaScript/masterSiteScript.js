@@ -20,7 +20,6 @@ $(document).ready(function(){
         validationUsername = validateIfEmpty(username);
         validationPassword = validateIfEmpty(password);
         if(validationPassword && validationUsername){
-            alert("you are here 2");
             $.ajax({
                 type: 'POST',
                 url: 'database/login.php',
@@ -28,16 +27,16 @@ $(document).ready(function(){
                     username: username,
                     password: password
                 },
-                dataype: 'json',
+                dataType: 'json',
                 success: function(json) {
-                    
+                   
                     $.each(json, function(i, item) {
                         if (typeof item == 'object') {
                             var element = item.result;
                             alert(element);
                             if(!element){
                                 alert("this is a test on login");
-                                $('#loginOut').html();
+                                $('#loginOut').html("yeah something");
                             }
                         }
                     });
@@ -46,6 +45,7 @@ $(document).ready(function(){
                 },
                 error: function(r) {
                     alert("login failed" + r);
+                    
                 }
             });
         }else{
@@ -71,13 +71,13 @@ $(document).ready(function(){
         if(validationEmail && validationPassword && validationUsername){
             $.ajax({
                type: 'POST',
-               url: 'database/registration.php',
+               url: '/database/registration.php',
                data:{
                     username: regUsername,
                     password: regPassword,
                     email: regEmail
                 },
-                dataype: 'json',
+                dataType: 'json',
                 success: function(json) {
                     alert("you are here");
                     $.each(json, function(i, item) {
@@ -176,7 +176,7 @@ $(document).ready(function(){
             data:{
                 searchQuery: searchQuery
             },
-            dataype: 'json',
+            dataType: 'json',
            
             success: function(json) {
                 $.each(json, function(i, item) {

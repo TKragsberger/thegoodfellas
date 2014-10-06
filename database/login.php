@@ -24,10 +24,8 @@ if ( !empty ( $_POST ) ) {
         $sql = "SELECT * FROM $table WHERE USER_NAME = '" . $subName . "'";
         $link = $jdb->getLink();
         $results = $jdb->select($link, $sql);
-        $result = utf8_encode($link . " something");
-        //Kill the script if the submitted username doesn't exit
         if (!$results) {
-//            $result = utf8_encode("username");
+            $result = utf8_encode("username");
             
         }else{
 
@@ -58,15 +56,16 @@ if ( !empty ( $_POST ) ) {
                 //Set our authorization cookie
                 setcookie('theGoodfellasAuth[user]', $subName, 0, '', '', '', true);
                 setcookie('theGoodfellasAuth[authID]', $authID, 0, '', '', '', true);
-                $result = utf8_encode($subName);
+                $result = utf8_encode("test");
                 
         } else {
-//                $result = utf8_encode("password");
+                $result = utf8_encode("password");
         }
         }
-        $data[] = array('result' => $result);
-        echo json_encode($data);
+        
 } else {
-        die('empty');
+        $result = utf8_encode("empty");
 }
+$data[] = array('result' => $result);
+echo json_encode($data);
 

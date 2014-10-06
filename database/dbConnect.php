@@ -29,7 +29,7 @@ if(!class_exists('TheGoodFellasDatabase')){
 		}
                 
                 function getLink(){
-                    return mysqli_connect('kragsberger.dk.mysql', DB_USER, DB_PASS, "users");
+                    return mysqli_connect('kragsberger.dk.mysql', DB_USER, DB_PASS, "kragsberger_dk");
                 }
 	
 		/**
