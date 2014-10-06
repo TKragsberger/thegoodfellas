@@ -1,5 +1,6 @@
 <?php
-require_once('dbConnect.php');
+require_once 'dbConnect.php';
+
 header('Content-Type: application/json');
 global $jdb;
 $data = array();
@@ -7,7 +8,7 @@ $result = "";
 
 //Check to make sure the form submission is coming from our script
 //The full URL of our registration page
-$current = 'http://localhost/thegoodfellas/index.html';
+$current = 'http://kragsberger.dk/thegoodfellas/';
 
 //The full URL of the page the form was submitted from
 $referrer = $_SERVER['HTTP_REFERER'];
@@ -15,8 +16,8 @@ $referrer = $_SERVER['HTTP_REFERER'];
  * Check to see if the $_POST array has date (i.e. our form was submitted) and if so,
  * process the form data.
  */
-if ( !empty ( $_POST ) ) {
 
+if ( !empty ( $_POST ) ) {
         /* 
          * Here we actually run the check to see if the form was submitted from our
          * site. Since our registration from submits to itself, this is pretty easy. If
@@ -24,7 +25,6 @@ if ( !empty ( $_POST ) ) {
          * we don't allow the data through.
          */
         if ( $referrer == $current ) {
-
                 //Require our database class
 
 
@@ -35,15 +35,11 @@ if ( !empty ( $_POST ) ) {
                 //These are the fields in that table that we want to insert data into
                 $fields = array('USER_NAME', 'USER_PASS', 'USER_EMAIL', 'USER_REGISTERED');
 
-                //These are the values from our registration form... cleaned using our clean method
-                $values = $jdb->clean($_POST);
-
                 //Now, we're breaking apart our $_POST array, so we can storely our password securely
-                $username = $_POST['username'];
-                $userpass = $_POST['password'];
-                $useremail = $_POST['email'];
+                $username = mysql_real_escape_string($_POST['username']);
+                $userpass = mysql_real_escape_string($_POST['password']);
+                $useremail = mysql_real_escape_string($_POST['email']);
                 $userreg = time();
-
                 //We create a NONCE using the action, username, timestamp, and the NONCE SALT
                 $nonce = md5('registration-' . $username . $userreg . NONCE_SALT);
 
@@ -63,7 +59,7 @@ if ( !empty ( $_POST ) ) {
 
                 if ( $insert == TRUE ) {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                            
-//                                              ændre så der står i registrings from at din account er blevet lavet log ind vent 5 sek +- 5 sek og så luk vindue
+//                ændre så der står i registrings from at din account er blevet lavet log ind vent 5 sek +- 5 sek og så luk vindue
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     $result = utf8_encode(true);
                 } else{
@@ -75,4 +71,5 @@ if ( !empty ( $_POST ) ) {
         $data[] = array('result' => $result);
         echo json_encode($data);
 }
+
 		

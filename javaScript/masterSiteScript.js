@@ -1,11 +1,16 @@
 $(document).ready(function(){
     var validationUsername;
     var validationPassword;
+    var html = "";
     connectToDB();
     masterAjax('htmlsites/topMenu.html', '#topMenu');
     masterAjax('htmlsites/leftMenu.html', '#sideMenuLeft');
     masterAjax('htmlsites/content.html', '#content');
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
+    
+    $("#sideMenuRight").on("click", "#logout", function(){
+        
+    });
 
     $("#sideMenuRight").on("click", "#login", function(){
         $("#usernameError").html("");
@@ -25,13 +30,14 @@ $(document).ready(function(){
                 },
                 dataype: 'json',
                 success: function(json) {
-                    alert("you are here");
+                    
                     $.each(json, function(i, item) {
                         if (typeof item == 'object') {
                             var element = item.result;
-                            if(element){
-                                alert(element +  " success");
-                                $('#footer').html(element);
+                            alert(element);
+                            if(!element){
+                                alert("this is a test on login");
+                                $('#loginOut').html();
                             }
                         }
                     });
@@ -39,7 +45,7 @@ $(document).ready(function(){
 
                 },
                 error: function(r) {
-                    alert("Edit ajax failed" + r);
+                    alert("login failed" + r);
                 }
             });
         }else{
@@ -73,8 +79,9 @@ $(document).ready(function(){
                 },
                 dataype: 'json',
                 success: function(json) {
+                    alert("you are here");
                     $.each(json, function(i, item) {
-                        if (typeof item == 'object') {
+                        if (typeof item === 'object') {
                             var element = item.result;
                             if(element){
                                 $('#registrationTable').html("Din bruger er blevet oprettet");
@@ -83,7 +90,7 @@ $(document).ready(function(){
                     });
                 },
                 error: function(r) {
-                    alert("Edit ajax failed" + r);
+                    alert("Registration failed" + r);
                 }
             });
         }else{
@@ -115,6 +122,11 @@ $(document).ready(function(){
     $("#registration").on("click", ".closeRegistration", function() {
       document.getElementById('registration').innerHTML = '';
     });
+    
+    function loggedIn(username){
+        html = "<div>Velkommen"+username+"</div>";
+        $('#loginOut').html(html);
+    }
     
     function connectToDB(){
         $.ajax({

@@ -1,6 +1,6 @@
 <?php
 // Our database class
-require_once '/config.php';
+require_once 'config.php';
 if(!class_exists('TheGoodFellasDatabase')){
 	class TheGoodFellasDatabase {
             
@@ -13,7 +13,7 @@ if(!class_exists('TheGoodFellasDatabase')){
 		 *
 		 */	
 		function TheGoodFellasDatabase() {
-			return $this->__construct();
+			return $this->construct();
 		}
 		
 		/**
@@ -23,13 +23,13 @@ if(!class_exists('TheGoodFellasDatabase')){
 		 * the actual setting up of the connection to the database.
 		 *
 		 */
-		function __construct() {
+		function construct() {
                     
 			$this->connect();
 		}
                 
                 function getLink(){
-                    return mysql_connect('kragsberger.dk.mysql', DB_USER, DB_PASS);
+                    return mysqli_connect('kragsberger.dk.mysql', DB_USER, DB_PASS, "users");
                 }
 	
 		/**
@@ -41,13 +41,13 @@ if(!class_exists('TheGoodFellasDatabase')){
 			$link = $this->getLink();
 
 			if (!$link) {
-				die('Could not connect: ' . mysql_error());
+				die('Could not connect: ' . mysqli_error());
 			}
 
-			$db_selected = mysql_select_db(DB_NAME, $link);
+			$db_selected = mysqli_select_db($link, DB_NAME);
 
 			if (!$db_selected) {
-				die('Can\'t use ' . DB_NAME . ': ' . mysql_error());
+				die('Can\'t use ' . DB_NAME . ': ' . mysqli_error());
 			}
                         
 		}
@@ -96,8 +96,8 @@ if(!class_exists('TheGoodFellasDatabase')){
 			$values = implode("', '", $values);
 			$sql="INSERT INTO $table (id, $fields) VALUES ('', '$values')";
 
-			if (!mysql_query($sql)) {
-				die('Error: ' . mysql_error());
+			if (!mysqli_query($link, $sql)) {
+				die('Error: ' . mysqli_error());
 			} else {
 				return TRUE;
 			}
@@ -113,8 +113,8 @@ if(!class_exists('TheGoodFellasDatabase')){
 		 * @param array $where The field(s) to search a specific value for
 		 * @param array $equals The value being searched for
 		 */
-		function select($sql) {
-			$results = mysql_query($sql);
+		function select($link, $sql) {
+			$results = mysqli_query($link, $sql);
 			
 			return $results;
 		}

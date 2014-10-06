@@ -8,11 +8,10 @@ $result = "";
 if ( !empty ( $_POST ) ) {
 
         //Clean our form data
-        $values = $jdb->clean($_POST);
 
         //The username and password submitted by the user
-        $subName = $values['username'];
-        $subPass = $values['password'];
+        $subName = mysql_real_escape_string($_POST['username']);
+        $subPass = mysql_real_escape_string($_POST['password']);
 
         //The name of the table we want to select data from
         $table = 'users';
@@ -23,11 +22,12 @@ if ( !empty ( $_POST ) ) {
          */
         
         $sql = "SELECT * FROM $table WHERE USER_NAME = '" . $subName . "'";
-        $results = $jdb->select($sql);
-
+        $link = $jdb->getLink();
+        $results = $jdb->select($link, $sql);
+        $result = utf8_encode($link . " something");
         //Kill the script if the submitted username doesn't exit
         if (!$results) {
-            $result = utf8_encode("username");
+//            $result = utf8_encode("username");
             
         }else{
 
@@ -58,10 +58,10 @@ if ( !empty ( $_POST ) ) {
                 //Set our authorization cookie
                 setcookie('theGoodfellasAuth[user]', $subName, 0, '', '', '', true);
                 setcookie('theGoodfellasAuth[authID]', $authID, 0, '', '', '', true);
-                $result = utf8_encode(true);
+                $result = utf8_encode($subName);
                 
         } else {
-                $result = utf8_encode("password");
+//                $result = utf8_encode("password");
         }
         }
         $data[] = array('result' => $result);
