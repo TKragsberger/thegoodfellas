@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 global $jdb;
 $data = array();
 $result = "";
+$neverExpire = "";
 
 if ( !empty ( $_POST ) ) {
 
@@ -12,6 +13,7 @@ if ( !empty ( $_POST ) ) {
         //The username and password submitted by the user
         $subName = mysql_real_escape_string(filter_input(INPUT_POST, 'username'));
         $subPass = mysql_real_escape_string(filter_input(INPUT_POST, 'password'));
+        $neverExpire = mysql_real_escape_string(INPUT_POST, 'neverExpire');
 
         //The name of the table we want to select data from
         $table = 'users';
@@ -53,8 +55,13 @@ if ( !empty ( $_POST ) ) {
                 $authID = $jdb->hash_password($subPass, $authNonce);
 
                 //Set our authorization cookie
-                setcookie('theGoodfellasAuth[user]', $subName, 0, '', '', '', true);
-                setcookie('theGoodfellasAuth[authID]', $authID, 0, '', '', '', true);
+                if($neverExpire){
+                setcookie('theGoodfellasAuth[user]', $subName, time() + (10 * 365 * 24 * 60 * 60), '', '', '', true);
+                setcookie('theGoodfellasAuth[authID]', $authID, time() + (10 * 365 * 24 * 60 * 60), '', '', '', true);
+                } else {
+                    setcookie('theGoodfellasAuth[user]', $subName, 0, '', '', '', true);
+                    setcookie('theGoodfellasAuth[authID]', $authID, 0, '', '', '', true);
+                }
                 $result = utf8_encode("test");
                 
         } else {

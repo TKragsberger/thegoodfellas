@@ -48,6 +48,7 @@ $(document).ready(function(){
         $("#passwordError").html("");
         var username = $("#username").val();
         var password = $("#password").val();
+        var neverExpire = $('#neverExpire').prop('checked');
         validationUsername = validateIfEmpty(username);
         validationPassword = validateIfEmpty(password);
         if(validationPassword && validationUsername){
@@ -56,7 +57,8 @@ $(document).ready(function(){
                 url: 'database/login.php',
                 data:{
                     username: username,
-                    password: password
+                    password: password,
+                    neverExpire: neverExpire
                 },
                 dataType: 'json',
                 success: function(json) {
