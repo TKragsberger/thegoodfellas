@@ -24,12 +24,11 @@ if(!class_exists('TheGoodFellasDatabase')){
 		 *
 		 */
 		function construct() {
-                    
 			$this->connect();
 		}
                 
                 function getLink(){
-                    return mysqli_connect('kragsberger.dk.mysql', DB_USER, DB_PASS, "kragsberger_dk");
+                    return mysql_connect('kragsberger.dk.mysql', DB_USER, DB_PASS);
                 }
 	
 		/**
@@ -41,13 +40,13 @@ if(!class_exists('TheGoodFellasDatabase')){
 			$link = $this->getLink();
 
 			if (!$link) {
-				die('Could not connect: ' . mysqli_error());
+				die('Could not connect: ' . mysql_error());
 			}
 
-			$db_selected = mysqli_select_db($link, DB_NAME);
+			$db_selected = mysql_select_db(DB_NAME);
 
 			if (!$db_selected) {
-				die('Can\'t use ' . DB_NAME . ': ' . mysqli_error());
+				die('Can\'t use ' . DB_NAME . ': ' . mysql_error());
 			}
                         
 		}
@@ -96,8 +95,8 @@ if(!class_exists('TheGoodFellasDatabase')){
 			$values = implode("', '", $values);
 			$sql="INSERT INTO $table (id, $fields) VALUES ('', '$values')";
 
-			if (!mysqli_query($link, $sql)) {
-				die('Error: ' . mysqli_error());
+			if (!mysql_query($sql)) {
+				die('Error: ' . mysql_error());
 			} else {
 				return TRUE;
 			}
@@ -113,8 +112,8 @@ if(!class_exists('TheGoodFellasDatabase')){
 		 * @param array $where The field(s) to search a specific value for
 		 * @param array $equals The value being searched for
 		 */
-		function select($link, $sql) {
-			$results = mysqli_query($link, $sql);
+		function select($sql) {
+			$results = mysql_query($sql);
 			
 			return $results;
 		}

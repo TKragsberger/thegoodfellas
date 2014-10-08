@@ -36,9 +36,9 @@ if ( !empty ( $_POST ) ) {
                 $fields = array('USER_NAME', 'USER_PASS', 'USER_EMAIL', 'USER_REGISTERED');
 
                 //Now, we're breaking apart our $_POST array, so we can storely our password securely
-                $username = mysql_real_escape_string($_POST['username']);
-                $userpass = mysql_real_escape_string($_POST['password']);
-                $useremail = mysql_real_escape_string($_POST['email']);
+                $username = mysql_real_escape_string(filter_input(INPUT_POST, 'username'));
+                $userpass = mysql_real_escape_string(filter_input(INPUT_POST, 'password'));
+                $useremail = mysql_real_escape_string(filter_input(INPUT_POST, 'email'));
                 $userreg = time();
                 //We create a NONCE using the action, username, timestamp, and the NONCE SALT
                 $nonce = md5('registration-' . $username . $userreg . NONCE_SALT);

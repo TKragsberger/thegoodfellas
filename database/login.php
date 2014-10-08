@@ -1,5 +1,5 @@
 <?php
-require_once('dbConnect.php');
+require_once 'dbConnect.php';
 header('Content-Type: application/json');
 global $jdb;
 $data = array();
@@ -10,8 +10,8 @@ if ( !empty ( $_POST ) ) {
         //Clean our form data
 
         //The username and password submitted by the user
-        $subName = mysql_real_escape_string($_POST['username']);
-        $subPass = mysql_real_escape_string($_POST['password']);
+        $subName = mysql_real_escape_string(filter_input(INPUT_POST, 'username'));
+        $subPass = mysql_real_escape_string(filter_input(INPUT_POST, 'password'));
 
         //The name of the table we want to select data from
         $table = 'users';
@@ -22,8 +22,7 @@ if ( !empty ( $_POST ) ) {
          */
         
         $sql = "SELECT * FROM $table WHERE USER_NAME = '" . $subName . "'";
-        $link = $jdb->getLink();
-        $results = $jdb->select($link, $sql);
+        $results = $jdb->select($sql);
         if (!$results) {
             $result = utf8_encode("username");
             
@@ -59,7 +58,7 @@ if ( !empty ( $_POST ) ) {
                 $result = utf8_encode("test");
                 
         } else {
-                $result = utf8_encode("password");
+                $result = utf8_encode(false);
         }
         }
         

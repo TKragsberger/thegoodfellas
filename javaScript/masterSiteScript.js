@@ -9,7 +9,38 @@ $(document).ready(function(){
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
     
     $("#sideMenuRight").on("click", "#logout", function(){
-        
+        alert("logout");
+        $.ajax({
+                url: 'database/logout.php',
+                dataType: 'json',
+                success: function(json) {
+                   
+                    $.each(json, function(i, item) {
+                        if (typeof item == 'object') {
+                            var element = item.result;
+                            
+                            if(!element){
+                                console.log("logout fail");
+                            } else {
+                                html =  '<div><input id="username"  type="text" placeholder="Brugernavn"></div>'+
+                                        '<div id="usernameError" class="errorText"></div>'+
+                                        '<div><input id="password" type="password" placeholder="Kodeord"></div>'+
+                                        '<div id="passwordError" class="errorText"></div>'+
+                                        '<div style="float: left"><button id="login" class="sideMenuLink">Login</button></div>'+
+                                        '<div style="text-align: right"><button id="register" class="sideMenuLink">Opret bruger</button></div>';
+                                $('#loginOutTitle').html("Login");
+                                $('#loginOut').html(html);
+                            }
+                        }
+                    });
+
+
+                },
+                error: function(r) {
+                    alert("logout failed" + r);
+                    
+                }
+            });
     });
 
     $("#sideMenuRight").on("click", "#login", function(){
@@ -33,10 +64,13 @@ $(document).ready(function(){
                     $.each(json, function(i, item) {
                         if (typeof item == 'object') {
                             var element = item.result;
-                            alert(element);
+                            
                             if(!element){
-                                alert("this is a test on login");
-                                $('#loginOut').html("yeah something");
+                                $('#passwordError').html("Forkert brugernavn eller password");
+                            } else {
+                                html = '<div><button id="logout" class="sideMenuLink">Log ud</button></div>';
+                                $('#loginOutTitle').html('Velkommen '+element);
+                                $('#loginOut').html(html);
                             }
                         }
                     });
@@ -71,7 +105,7 @@ $(document).ready(function(){
         if(validationEmail && validationPassword && validationUsername){
             $.ajax({
                type: 'POST',
-               url: '/database/registration.php',
+               url: 'database/registration.php',
                data:{
                     username: regUsername,
                     password: regPassword,
