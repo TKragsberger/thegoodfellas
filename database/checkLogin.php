@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 global $jdb;
 $data = array();
 $result = "";
+$username = "";
 
 //Grab our authorization cookie array
 $cookie = $_COOKIE['theGoodfellasAuth'];
@@ -32,19 +33,20 @@ if ( !empty ( $cookie ) ) {
         $results = mysql_fetch_assoc( $results );
 
         //The registration date of the stored matching user
-        $stoReg = $results['user_registered'];
+        $stoReg = $results['USER_REGISTERED'];
 
         //The hashed password of the stored matching user
-        $stoPass = $results['user_pass'];
+        $stoPass = $results['USER_PASS'];
 
         //Rehash password to see if it matches the value stored in the cookie
         $authNonce = md5('cookie-' . $user . $stoReg . AUTH_SALT);
         $stoPass = $jdb->hash_password($stoPass, $authNonce);
 
         if ( $stoPass == $authID ) {
-                $results = true;
+                $result = true;
+                $username = utf8_encode($user);
         } else {
-                $results = false;
+                $result = false;
         }
 } else {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                            
@@ -59,4 +61,6 @@ if ( !empty ( $cookie ) ) {
 //				exit;
 }
 
-return $results;
+$data[] = array('result' => $result,
+                'username' => $username);
+echo json_encode($data);

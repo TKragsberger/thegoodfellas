@@ -3,33 +3,24 @@ $(document).ready(function(){
     var validationPassword;
     var html = "";
     connectToDB();
+    checkLogin();
     masterAjax('htmlsites/topMenu.html', '#topMenu');
     masterAjax('htmlsites/leftMenu.html', '#sideMenuLeft');
     masterAjax('htmlsites/content.html', '#content');
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
     
     $("#sideMenuRight").on("click", "#logout", function(){
-        alert("logout");
         $.ajax({
                 url: 'database/logout.php',
                 dataType: 'json',
                 success: function(json) {
-                   
                     $.each(json, function(i, item) {
                         if (typeof item == 'object') {
                             var element = item.result;
-                            
                             if(!element){
                                 console.log("logout fail");
                             } else {
-                                html =  '<div><input id="username"  type="text" placeholder="Brugernavn"></div>'+
-                                        '<div id="usernameError" class="errorText"></div>'+
-                                        '<div><input id="password" type="password" placeholder="Kodeord"></div>'+
-                                        '<div id="passwordError" class="errorText"></div>'+
-                                        '<div style="float: left"><button id="login" class="sideMenuLink">Login</button></div>'+
-                                        '<div style="text-align: right"><button id="register" class="sideMenuLink">Opret bruger</button></div>';
-                                $('#loginOutTitle').html("Login");
-                                $('#loginOut').html(html);
+                                logoutHtml();
                             }
                         }
                     });
@@ -37,7 +28,7 @@ $(document).ready(function(){
 
                 },
                 error: function(r) {
-                    alert("logout failed" + r);
+                    console.log("logout failed" + r);
                     
                 }
             });
@@ -62,7 +53,6 @@ $(document).ready(function(){
                 },
                 dataType: 'json',
                 success: function(json) {
-                   
                     $.each(json, function(i, item) {
                         if (typeof item == 'object') {
                             var element = item.result;
@@ -70,9 +60,10 @@ $(document).ready(function(){
                             if(!element){
                                 $('#passwordError').html("Forkert brugernavn eller password");
                             } else {
-                                html = '<div><button id="logout" class="sideMenuLink">Log ud</button></div>';
-                                $('#loginOutTitle').html('Velkommen '+element);
-                                $('#loginOut').html(html);
+                                loginHtml(username);
+//                                html = '<div><button id="logout" class="sideMenuLink">Log ud</button></div>';
+//                                $('#loginOutTitle').html('Velkommen '+element);
+//                                $('#loginOut').html(html);
                             }
                         }
                     });
@@ -80,7 +71,7 @@ $(document).ready(function(){
 
                 },
                 error: function(r) {
-                    alert("login failed" + r);
+                    console.log("login failed" + r);
                     
                 }
             });
@@ -115,7 +106,6 @@ $(document).ready(function(){
                 },
                 dataType: 'json',
                 success: function(json) {
-                    alert("you are here");
                     $.each(json, function(i, item) {
                         if (typeof item === 'object') {
                             var element = item.result;
@@ -126,7 +116,7 @@ $(document).ready(function(){
                     });
                 },
                 error: function(r) {
-                    alert("Registration failed" + r);
+                    console.log("Registration failed" + r);
                 }
             });
         }else{
@@ -159,17 +149,51 @@ $(document).ready(function(){
       document.getElementById('registration').innerHTML = '';
     });
     
-    function loggedIn(username){
-        html = "<div>Velkommen"+username+"</div>";
-        $('#loginOut').html(html);
-    }
-    
     function connectToDB(){
         $.ajax({
            url: 'database/dbConnect.php',
            success: function(data){
                console.log("Der er forbindelse til databasen" + data);
            }
+        });
+    }
+    
+    function loginHtml(user){
+        html = '<div><button id="logout" class="sideMenuLink">Log ud</button></div>';
+        $('#loginOutTitle').html('Velkommen '+user);
+        $('#loginOut').html(html);
+    }
+    
+    function logoutHtml(){
+        html =  '<div><input id="username" class="inputLogin" type="text" placeholder="Brugernavn"></div>'+
+                '<div id="usernameError" class="errorText"></div>'+
+                '<div><input id="password" class="inputLogin" type="password" placeholder="Kodeord"></div>'+
+                '<div id="passwordError" class="errorText"></div>'+
+                '<div><input id="neverExpire" type="checkbox" name="remeberMe" value="Husk login">Husk login</div>'+
+                '<div style="float: left"><button id="login" class="sideMenuLink">Login</button></div>'+
+                '<div style="text-align: right"><button id="register" class="sideMenuLink">Opret bruger</button></div>';
+            $('#loginOutTitle').html("Login");
+            $('#loginOut').html(html);
+    }
+    
+    function checkLogin(){
+        $.ajax({
+            url: 'database/checkLogin.php',
+            dataType: 'json',
+            success: function(json){
+               $.each(json, function(i, item) {
+                    if (typeof item === 'object') {
+                        var element = item.result;
+                        var username = item.username;
+                        if(element){
+                            console.log("Der var Cookies fra tidligere session " + element);
+                            loginHtml(username);
+                        }else{
+                            console.log("Der var ikke Cookies fra tidligere session " + element);
+                        }
+                    }
+                });
+            }
         });
     }
     
@@ -203,7 +227,6 @@ $(document).ready(function(){
     
     $('#topMenu').on('click', 'a', function(){
         var targetContent = $(this).text();
-        alert(targetContent);
         var searchQuery = ""; //<-----TODO
         var html = "<table>";
         $.ajax({

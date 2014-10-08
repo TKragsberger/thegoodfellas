@@ -13,7 +13,7 @@ if ( !empty ( $_POST ) ) {
         //The username and password submitted by the user
         $subName = mysql_real_escape_string(filter_input(INPUT_POST, 'username'));
         $subPass = mysql_real_escape_string(filter_input(INPUT_POST, 'password'));
-        $neverExpire = mysql_real_escape_string(INPUT_POST, 'neverExpire');
+        $neverExpire = mysql_real_escape_string(filter_input(INPUT_POST, 'neverExpire'));
 
         //The name of the table we want to select data from
         $table = 'users';
