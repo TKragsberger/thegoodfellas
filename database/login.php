@@ -62,7 +62,7 @@ if ( !empty ( $_POST ) ) {
                     setcookie('theGoodfellasAuth[user]', $subName, 0, '', '', '', true);
                     setcookie('theGoodfellasAuth[authID]', $authID, 0, '', '', '', true);
                 }
-                $result = utf8_encode("test");
+                $result = utf8_encode(true);
                 
         } else {
                 $result = utf8_encode(false);
