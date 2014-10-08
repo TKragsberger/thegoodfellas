@@ -24,12 +24,9 @@ $(document).ready(function(){
                             }
                         }
                     });
-
-
                 },
                 error: function(r) {
                     console.log("logout failed" + r);
-                    
                 }
             });
     });
@@ -61,18 +58,12 @@ $(document).ready(function(){
                                 $('#passwordError').html("Forkert brugernavn eller password");
                             } else {
                                 loginHtml(username);
-//                                html = '<div><button id="logout" class="sideMenuLink">Log ud</button></div>';
-//                                $('#loginOutTitle').html('Velkommen '+element);
-//                                $('#loginOut').html(html);
                             }
                         }
                     });
-
-
                 },
                 error: function(r) {
                     console.log("login failed" + r);
-                    
                 }
             });
         }else{
@@ -224,37 +215,5 @@ $(document).ready(function(){
             }
         });
     }
-    
-    $('#topMenu').on('click', 'a', function(){
-        var targetContent = $(this).text();
-        var searchQuery = ""; //<-----TODO
-        var html = "<table>";
-        $.ajax({
-            type: 'GET',
-            url: 'search.php',
-            data:{
-                searchQuery: searchQuery
-            },
-            dataType: 'json',
-           
-            success: function(json) {
-                $.each(json, function(i, item) {
-                    if (typeof item === 'object') {
-                        var element = item.searchResult;
-                        var columnName = item.columnNames;
-                        for (var j = 0; j < columnName.length; j++) {
-                            html +='<tr><td id="'+columnName[j]+'">'+columnName[j]+'</td></tr>';
-                        }
-                        html += '</table>';
-                    }
-                });
-                $(div).html(html);
-            },
-            error: function(r) {
-                html = '';
-                $('#error').html('that did not work in getall '+r);
-            }
-        }); 
-    });
 });
 
