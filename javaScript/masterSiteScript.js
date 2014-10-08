@@ -11,24 +11,24 @@ $(document).ready(function(){
     
     $("#sideMenuRight").on("click", "#logout", function(){
         $.ajax({
-                url: 'database/logout.php',
-                dataType: 'json',
-                success: function(json) {
-                    $.each(json, function(i, item) {
-                        if (typeof item == 'object') {
-                            var element = item.result;
-                            if(!element){
-                                console.log("logout fail");
-                            } else {
-                                logoutHtml();
-                            }
+            url: 'database/logout.php',
+            dataType: 'json',
+            success: function(json) {
+                $.each(json, function(i, item) {
+                    if (typeof item == 'object') {
+                        var element = item.result;
+                        if(!element){
+                            console.log("logout fail");
+                        } else {
+                            logoutHtml();
                         }
-                    });
-                },
-                error: function(r) {
-                    console.log("logout failed" + r);
-                }
-            });
+                    }
+                });
+            },
+            error: function(r) {
+                console.log("logout failed" + r);
+            }
+        });
     });
 
     $("#sideMenuRight").on("click", "#login", function(){
@@ -88,9 +88,9 @@ $(document).ready(function(){
         var validationEmail = validateEmail(regEmail);
         if(validationEmail && validationPassword && validationUsername){
             $.ajax({
-               type: 'POST',
-               url: 'database/registration.php',
-               data:{
+                type: 'POST',
+                url: 'database/registration.php',
+                data:{
                     username: regUsername,
                     password: regPassword,
                     email: regEmail
@@ -142,10 +142,10 @@ $(document).ready(function(){
     
     function connectToDB(){
         $.ajax({
-           url: 'database/dbConnect.php',
-           success: function(data){
-               console.log("Der er forbindelse til databasen" + data);
-           }
+            url: 'database/dbConnect.php',
+            success: function(data){
+                console.log("Der er forbindelse til databasen" + data);
+            }
         });
     }
     
