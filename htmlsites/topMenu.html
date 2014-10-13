@@ -1,14 +1,46 @@
-    <img id="leftImg" alt="allyLogo" class="img" src="IMG/AllyLogoSmall.png">
-    <div id="topMenuTxt">
-        <div id="header">The Goodfellas</div>
-        <div id="links">
-            <a id="home" class="topMenuLink">Home</a>
-            <a id="forum" class="topMenuLink">Forum</a>
-            <a id="news" class="topMenuLink">News</a>
-            <a id="roster" class="topMenuLink">Roster</a>
-            <a id="videos" class="topMenuLink">Videos</a>
-            <a id="media" class="topMenuLink">Media</a>
-            <a id="activities" class="topMenuLink">Activities</a>
+<script type="text/javascript" src="javaScript/carousel.js"></script>
+<script type="text/javascript">
+            $(document).ready(function(){
+            $('.carousel').carousel();
+            });
+</script>
+<div id='topMenu'>
+    <div id='menuCentent' style="background-image: url('IMG/topMenu/10457-metallic-texture-1920x1080-abstract-wallpaper.jpg'); background-size: 850px 265px">
+        <div id='menuCentent' style="background-image: url('IMG/topMenu/karom.png'); background-size: 850px 265px">
+            <div style="text-align: left; margin-left: 115px; margin-top: 20px">
+                <div id="header">The Goodfellas</div>
+                <div id='headerTwo'>EU-Ravencrest</div>
+            </div>
+            <div id="links" style="margin-top: 63px">
+                <button id="home" class="topMenuLink">Home</button>
+                <button id="forum" class="topMenuLink">Forum</button>
+                <button id="news" class="topMenuLink">News</button>
+                <button id="roster" class="topMenuLink">Roster</button>
+                <button id="videos" class="topMenuLink">Videos</button>
+                <button id="media" class="topMenuLink">Media</button>
+                <button id="activities" class="topMenuLink">Activities</a>
+            </div>
         </div>
     </div>
-    <img id="rightImg" alt="allyLogo" class="img" src="IMG/AllyLogoSmall.png">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 500px; float: right; display: inline-block;">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item"><img src="IMG/killShots/juggenought.jpg"></div>
+            <div class="item"><img src="IMG/killShots/malkorok.jpg"></div>
+            <div class="item"><img src="IMG/killShots/spoils.jpg"></div>
+            <div class="item"><img src="IMG/killShots/thok.jpg"></div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>

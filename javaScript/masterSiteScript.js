@@ -8,6 +8,7 @@ $(document).ready(function(){
     masterAjax('htmlsites/leftMenu.html', '#sideMenuLeft');
     masterAjax('htmlsites/content.html', '#content');
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
+    $('.carousel').carousel();
     
     $("#sideMenuRight").on("click", "#logout", function(){
         $.ajax({
