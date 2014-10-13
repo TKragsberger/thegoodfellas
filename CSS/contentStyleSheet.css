@@ -2,10 +2,8 @@
     background-color: rgba(0, 0, 0, 0.9);
     text-align: center;
     height: 750px;
-    width: 600px;
+    width: 1000px;
     margin: auto;
-    margin-left: 67px;
-    margin-right: 67px;
     float: left;
 }
 
@@ -18,10 +16,10 @@
 
 button {
     background:none!important;
-     border:none; 
-     padding:0!important;
-     outline: none;
-     cursor: pointer;
+    border:none; 
+    padding:0!important;
+    outline: none;
+    cursor: pointer;
 }
 
 button:hover{
@@ -29,26 +27,22 @@ button:hover{
     text-decoration: underline;
 }
 
-
-
 #killShot{
     display: block;
     margin: auto;
     margin-top: 25px;
-    height: 400px; 
-    width: 550px
+    width: 1000px;
 }
 
 .contentText{
     text-align: left;
     color: #ffffff;
-    margin: 25px;
 }
 
 #body{
     text-align: center;
     height: 600px;
-    width: 1134px;
+    width: 1350px;
     margin: auto;
 }
 
