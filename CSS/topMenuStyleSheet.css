@@ -1,8 +1,4 @@
 #menuCentent{
-    width: 850px;
-    display: inline-block;
-}
-#menuCententer{
     width: 1350px;
     display: inline-block;
 }
@@ -21,18 +17,20 @@
 
 #header{
     font-size: 40px;
+    width: 500px;
     color: #ffffff;
 }
 
 #headerTwo{
     font-size: 18px;
+    width: 500px;
     color: #ffffff;
 }
 
 #links{
     text-align: center;
     height: 100px;
-    width: 850px;
+    width: 825px;
     margin: auto;
     display: inline-block;
     float: left;
