@@ -5,9 +5,9 @@ $(document).ready(function(){
     connectToDB();
     checkLogin();
     masterAjax('htmlsites/topMenu.html', '#topMenu');
-    masterAjax('htmlsites/leftMenu.html', '#sideMenuLeft');
     masterAjax('htmlsites/content.html', '#content');
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
+    masterAjax('htmlsites/footerMenu.html', '#footerMenu')
     $('.carousel').carousel();
     getRank();
     
