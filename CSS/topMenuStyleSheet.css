@@ -51,11 +51,6 @@ body{
     display: inline-block;
 }
 
-a:hover {
-    color: blue;
-    text-decoration: underline;
-}
-
 #activities{
     border-right: 1px solid white;
 }

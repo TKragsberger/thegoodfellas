@@ -2,7 +2,7 @@
     background-color: rgba(0, 0, 0, 0.9);
     text-align: center;
     height: 750px;
-    width: 1000px;
+    width: 1150px;
     margin: auto;
     float: left;
 }
@@ -27,14 +27,16 @@ button:hover{
     text-decoration: underline;
 }
 
-#killShot{
+#welcomeVideo{
     display: block;
     margin: auto;
     margin-top: 25px;
-    width: 1000px;
+    width: 1150px;
+    height: 606px;
 }
 
 .contentText{
+    margin-top: 25 px;
     text-align: left;
     color: #ffffff;
 }

@@ -1,5 +1,5 @@
 .inputLogin{
-    width: 150px;
+    width: 175px;
 }
 
 .sideMenu{
@@ -23,17 +23,35 @@
 .sideMenuText{
     text-align: left;
     color: #ffffff;
-    margin: 25px;
+    margin-top: 25px;
+    margin-left: 25px;
     font-size: 12px;
 }
 
 #recruitmentTable{
     margin-left: 20px;
     text-align: left;
-    width: 150px;
+    width: 175px;
 }
 
 .sideMenuLink{
     text-decoration: none;
     color: yellow;
 }
+
+a:hover{
+    text-decoration: underline;
+    color: yellow;
+}
+
+tr{
+    border-bottom: 1px solid white;
+}
+
+#deathKnight{
+    border-top: 1px solid white;
+}
+
+
+
+

@@ -9,6 +9,7 @@ $(document).ready(function(){
     masterAjax('htmlsites/content.html', '#content');
     masterAjax('htmlsites/rightMenu.html', '#sideMenuRight');
     $('.carousel').carousel();
+    getRank();
     
     $("#sideMenuRight").on("click", "#logout", function(){
         $.ajax({
@@ -214,6 +215,34 @@ $(document).ready(function(){
             success: function(data){
                 $(div).html(data);
             }
+        });
+    }
+    
+    function getRank(){
+        
+        $.ajax({
+            url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D'http%3A%2F%2Fwww.wowprogress.com%2Fguild%2Feu%2Fravencrest%2FThe%2BGoodfellas%2Frating.tier16_25%2Fjson_rank'&diagnostics=true",
+            dataType: 'xml',
+            success: function(xml) {
+                var data = $(xml).find('p').text();
+                var worldRankStart = data.indexOf("world_rank")+12;
+                var worldRankEnd = data.indexOf("area")-2;
+                var realmRankStart = data.indexOf("realm_rank")+12; 
+                var realmRankEnd = data.indexOf("}");
+                var worldRank = data.substring(worldRankStart, worldRankEnd);
+                var realmRank = data.substring(realmRankStart, realmRankEnd);
+                    if(!realmRankStart < 0 && worldRankStart < 0){
+                        $('#progress').html("Error");
+                    } else {
+                        html = '<div><a href="http://www.wowprogress.com/pve/eu/ravencrest" class="sideMenuLink">';
+                        html += "Realm Rank: "+ realmRank +"</a></div><br>";
+                        html += '<div><a href="http://www.wowprogress.com/pve/eu/ravencrest" class="sideMenuLink">World Rank: '+ worldRank +'</a></div>';
+                        $('#progress').html(html);
+                    }
+                },
+                error: function(r) {
+                    alert("get rank fail");
+                }
         });
     }
 });
